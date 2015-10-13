@@ -10,6 +10,8 @@
  \usepackage{color}
 \usepackage{hyperref}
 \usepackage{framed}
+\usepackage{algpseudocode}
+
 \usepackage[labelformat=empty]{caption}
 \title{Zusammenfassung - Kryptographie}
 \author{
@@ -45,6 +47,63 @@ Planung der Veranstaltung % Kann später wahrscheinlich ausgelassen werden.
 	\end{itemize}
 \end{enumerate}
 \end{framed}
-\section{Grundlagen}
-	
+\section{Grundlagen und Wiederholungen}
+\subsection{Probleme, deren Kodierung und Laufzeit von Algorithmen}
+Anhand einiger Beispiele soll die Wichtigkeit der Kodierung der Probleme bzw. der Eingabe verdeutlicht werden.
+\subsubsection{Sortieren}
+\begin{description}
+	\item[Eingabemenge:] Natürliche Zahlen $a_1, a_2,...,a_n$
+	\item[Ausgabe:] Eingabe aufsteigend sortiert
+\end{description}
+Beim Sortieren handelt es sich um ein \emph{Suchproblem}.
+Beispiele für bekannte Sortieralgorithmen und deren Laufzeitkomplexität sind Bubblesort $\mathcal{O}(n^2)$ und Mergesort $\mathcal{O}(n\log{}n)$\footnote{Sofern nicht anders angegeben entspricht $\log n$ immer dem dualen Logarithmus von n (Basis 2)}.
+\subsubsection{Eingabelänge N}
+Die Länge der Eingabe entspricht \emph{nicht} der Anzahl der zu sortierenden Elemente $n$.
+Dies ist aufgrund der Kodierung in eine maschinenlesbare Form der Fall.
+Für gewöhnlich verwenden heutige Computer eine Darstellung im Binärsystem. Daher gilt:
+\begin{equation}
+N := \sum_{i=1}^n \log a_i
+\end{equation}
+Im Folgenden soll die Eingabe [11, 13, 113] kodiert werden.
+Für eine Turingmaschine mit dem Eingabealphabet $\Sigma := \{0,1,\$ \}$ würde diese folgendermaßen aussehen:
+1011\textbf{\$}1101\textbf{\$}1110001.
+Um eine Lesbarkeit für Binärrechner zu ermöglichen, werden weiterhin folgende Ersetzungen durchgeführt:
+$1 \rightarrow 11$
+$0 \rightarrow 00$
+$\$ \rightarrow 01$
+Die resultierende Kodierung wäre nun:
+11001111\textbf{01}11110011\textbf{01}11111100000011.
+Sei nun $L$ die maximale Wortlänge\footnote{An dieser Stelle habe ich mit Förmi geschnattert und weiß daher nicht, ob das so korrekt ist}.
+\begin{equation}
+L := max_{i=1}^n \log a_i
+\end{equation}
+Hier sollte ergänzt werden, wie man auf das $O(N^3)$ kommt.
+\subsubsection{Primzahl}
+\begin{description}
+	\item[Eingabemenge:] Eine natürliche Zahl $n$
+	\item[Ausgabe:] Ist $n$ eine Primzahl? 
+\end{description}
+Es handelt sich um ein \emph{Entscheidungsproblem}.
+Die Eingabelänge ist $N := \log n$.
+Ein naiver Algorithmus wird im Folgenden beschrieben.
+
+\begin{algorithmic}[1]
+	\If {$n = 2$} \State \Return Ja
+	\Else \For {$d:=2$ \textbf{to} $n-1$}
+		\If {$n \mod d = 0$}
+			\State \Return Nein
+		\Else
+		\EndIf
+	\EndFor
+	\State \Return Ja
+	\EndIf
+\end{algorithmic}
+
+Die Komplexität lässt sich wie folgt herleiten:
+Für die Verzweigungen (Zeilen 1 und 5), sowie für die return-Statements in den Zeilen 2 und 6 ist eine beschränkte Komplexität $O(1)$ anzunehmen.
+Alle Statements in der for-Schleife werden $n-2$ mal wiederholt, die Komplexität ist $O(n)$.
+
+Die daraus resultierende Komplexität $O(n)$ ist äquivalent zu $O(2^{\log n})$.
+Weil $\log n$ der Eingabelänge N entspricht, ist die Komplexität entsprechend $O(2^N)$, also exponentiell.
+Demnach ist der Algorithmus nicht effizient.
 \end{document}
