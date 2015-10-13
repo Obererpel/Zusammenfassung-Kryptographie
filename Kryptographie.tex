@@ -78,6 +78,7 @@ Sei nun $L$ die maximale Wortlänge\footnote{An dieser Stelle habe ich mit Förm
 L := max_{i=1}^n \log a_i
 \end{equation}
 Hier sollte ergänzt werden, wie man auf das $O(N^3)$ kommt.
+
 \subsubsection{Primzahl}
 \begin{description}
 	\item[Eingabemenge:] Eine natürliche Zahl $n$
@@ -106,4 +107,15 @@ Alle Statements in der for-Schleife werden $n-2$ mal wiederholt, die Komplexitä
 Die daraus resultierende Komplexität $O(n)$ ist äquivalent zu $O(2^{\log n})$.
 Weil $\log n$ der Eingabelänge N entspricht, ist die Komplexität entsprechend $O(2^N)$, also exponentiell.
 Demnach ist der Algorithmus nicht effizient.
+
+\subsubsection{Cliquensuche im Graphen}
+\begin{description}
+	\item[Eingabemenge:] Graph $G= (V,E)$ und $k \in N$
+	\item[Ausgabe:] Hat G mindestens paarweise verbundene Knoten?
+\end{description}
+Es handelt sich hier wieder um ein \emph{Entscheidungsproblem}.
+
+
+\bibliographystyle{alpha}
+\bibliography{literatur}
 \end{document}
