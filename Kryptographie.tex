@@ -109,27 +109,26 @@ Weil $\log n$ der Eingabelänge N entspricht, ist die Komplexität entsprechend 
 Demnach ist der Algorithmus nicht effizient.
 
 \subsubsection{Cliquensuche im Graphen}
+
+\begin{framed}
+\textbf{CLIQUE}\\
 \begin{description}
 	\item[Eingabemenge:] Graph $G= (V,E)$ und $k \in N$
-	\item[Ausgabe:] Hat G mindestens paarweise verbundene Knoten?
-\end{description}
-Es handelt sich hier wieder um ein \emph{Entscheidungsproblem}.
-
-
-% Veranstaltung 2015_10_15
-\begin{framed}
-Clique
-Eingabe: Graph G=(V,E), k $\in$ N
-Frage: hat G eine Clique mit >=k knoten?
+	\item[Ausgabe:] Hat G mindestens paarweise verbundene Knoten (eine Clique C mit $\geq k$ Knoten)?
+\end{description} 
 \end{framed}
-\begin{framed}
-Clique-Suchversion:
-Eingabe Graph G=(V,E)
-Ausgabe: Bestimme eine Clique C mit maximaler Knotenzahl
-\end{framed}
-Behauptung: Clique in polynomieller Zeit lösbar => Clique-Suchversion auch in polynomieller Zeit lösbar
 
-polynomielle Zeit in n = |V> (Knotenzahl des Graphen)
+\begin{framed}
+\textbf{CLIQUE (Suchproblem)}\\
+\begin{description}
+	\item[Eingabemenge:] Graph $G= (V,E)$
+	\item[Ausgabe:] !!!!!!!!!!!!!!ERGÄNZEN!!!!!!!!!!!!!!!!
+\end{description} 
+\end{framed}
+
+Behauptung: Wenn CLIQUE (Entscheidungsproblem) in polynomieller Zeit lösbar ist, so ist auch die Suchversion von CLIQUE in polynomieller Zeit lösbar.\footnote{In polynomieller Zeit, abhängig von der Knotenzahl |V| des Graphen}
+
+polynomielle Zeit in n = |V| (Knotenzahl des Graphen)
 
 Beweis: 
 $\Leftarrow$ 
