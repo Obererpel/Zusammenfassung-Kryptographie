@@ -126,35 +126,35 @@ Demnach ist der Algorithmus nicht effizient.
 \end{description} 
 \end{framed}
 
-Behauptung: Wenn CLIQUE (Entscheidungsproblem) in polynomieller Zeit lösbar ist, so ist auch die Suchversion von CLIQUE in polynomieller Zeit lösbar.\footnote{In polynomieller Zeit, abhängig von der Knotenzahl |V| des Graphen}
+\textbf{Behauptung:} Wenn CLIQUE (Entscheidungsproblem) in polynomieller Zeit lösbar ist, so ist auch die Suchversion von CLIQUE in polynomieller Zeit lösbar.\footnote{In polynomieller Zeit, abhängig von der Knotenzahl |V| des Graphen}
 
-polynomielle Zeit in n = |V| (Knotenzahl des Graphen)
-
-Beweis: 
-$\Leftarrow$ 
-Zur Eingabe (G,k) von CLIQUE  bestimmen wir zunächst mit dem Alg für CLIQUE-Suchversion eine größte Clique C von G.
-Dann vergleiche $|C| \geq k$? Ausgabe JA, falls $|C| \geq k$ sonst NEIN
-
+\textbf{Beweis}\\
+\begin{description}
+\item[$\Leftarrow$] Zur Eingabe (G,k) von CLIQUE  bestimmen wir zunächst mit dem Algorithmus für CLIQUE-Suchversion eine größte Clique C von G.
+Dann vergleichen $|C| \geq k$? Ausgabe JA, falls $|C| \geq k$ sonst NEIN
 Laufzeit: Wie Laufzeit für Clique-Suchversion.
-
-$\Rightarrow$
+\item[$\Rightarrow$] Betrachte folgende Zwischenversion für CLIQUE:
 Betrachte folgende Zwischenversion für CLIQUE:
 \begin{framed}
-CLIQUE-Zwischenversion:
-Eingabe: Graph G=(V,E)
-Aufgabe: Bestimme die maximalzahl $\omega (G)$\footnote{$\omega(G) = max \{|C|: C ist eine Clique in G\}$ ist die Cliquenzahl} von paarweise verbundenen Knoten in G
+\textbf{CLIQUE-Zwischenversion:}
+\begin{description}
+\item  [Eingabe:]Graph G=(V,E)
+\item [Aufgabe:] Bestimme die maximalzahl $\omega (G)$\footnote{$\omega(G) = max \{|C|: C ist eine Clique in G\}$ ist die Cliquenzahl} von paarweise verbundenen Knoten in G
+\end{description}
 \end{framed}
-
-Behauptung: CLIQUE in polyzeit lösbar $\Rightarrow^{(1)}$ CLIQUE-Zwischenversion in polizeit lösbar $\rightarrow^{(2)}$ CLIQUE-Suchversion in polyzeit lösbar.
+\end{description}
+\textbf{Behauptung:} CLIQUE in polynomieller Zeit lösbar $\Rightarrow^{(1)}$ CLIQUE-Zwischenversion in polizeit lösbar $\Rightarrow^{(2)}$ CLIQUE-Suchversion in polynomieller Zeit lösbar.
 zu (1): Sei A ein polizeit-Algorithmus für CLIQUE.
 Zur Eingabe G von CLIQUE-Zwischenversion wende A auf Eingaben $(G,n), (G,n-1),...,(G,1)$ an!
 Ausgabe ist $\omega (G) =$ erstes k mit $A(G,k) = Ja$
 
-\begin{framed}
-For k:= n to 1 do
-	if A(G,k) = 'ja'
-	then return $omega (G) = k $
-\end{framed}
+\begin{algorithmic}[1]
+\For{ k:= n to 1}
+	\If A(G,k) = 'ja'
+	then return $\omega (G) = k $
+	\EndIf
+\EndFor
+\end{algorithmic}
 Laufzeit: $n \cdot O(n^c) = O(n^{c+1}$
 
 
