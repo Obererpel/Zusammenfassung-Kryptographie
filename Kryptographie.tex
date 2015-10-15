@@ -116,6 +116,99 @@ Demnach ist der Algorithmus nicht effizient.
 Es handelt sich hier wieder um ein \emph{Entscheidungsproblem}.
 
 
+% Veranstaltung 2015_10_15
+\begin{framed}
+Clique
+Eingabe: Graph G=(V,E), k $\in$ N
+Frage: hat G eine Clique mit >=k knoten?
+\end{framed}
+\begin{framed}
+Clique-Suchversion:
+Eingabe Graph G=(V,E)
+Ausgabe: Bestimme eine Clique C mit maximaler Knotenzahl
+\end{framed}
+Behauptung: Clique in polynomieller Zeit lösbar => Clique-Suchversion auch in polynomieller Zeit lösbar
+
+polynomielle Zeit in n = |V> (Knotenzahl des Graphen)
+
+Beweis: 
+$\Leftarrow$ 
+Zur Eingabe (G,k) von CLIQUE  bestimmen wir zunächst mit dem Alg für CLIQUE-Suchversion eine größte Clique C von G.
+Dann vergleiche $|C| \geq k$? Ausgabe JA, falls $|C| \geq k$ sonst NEIN
+
+Laufzeit: Wie Laufzeit für Clique-Suchversion.
+
+$\Rightarrow$
+Betrachte folgende Zwischenversion für CLIQUE:
+\begin{framed}
+CLIQUE-Zwischenversion:
+Eingabe: Graph G=(V,E)
+Aufgabe: Bestimme die maximalzahl $\omega (G)$\footnote{$\omega(G) = max \{|C|: C ist eine Clique in G\}$ ist die Cliquenzahl} von paarweise verbundenen Knoten in G
+\end{framed}
+
+Behauptung: CLIQUE in polyzeit lösbar $\Rightarrow^{(1)}$ CLIQUE-Zwischenversion in polizeit lösbar $\rightarrow^{(2)}$ CLIQUE-Suchversion in polyzeit lösbar.
+zu (1): Sei A ein polizeit-Algorithmus für CLIQUE.
+Zur Eingabe G von CLIQUE-Zwischenversion wende A auf Eingaben $(G,n), (G,n-1),...,(G,1)$ an!
+Ausgabe ist $\omega (G) =$ erstes k mit $A(G,k) = Ja$
+
+\begin{framed}
+For k:= n to 1 do
+	if A(G,k) = 'ja'
+	then return $omega (G) = k $
+\end{framed}
+Laufzeit: $n \cdot O(n^c) = O(n^{c+1}$
+
+
+(2): Sei A ein polyzeit Algorithmus für Clique-Zwischenversion.
+d.h. $A(G) = \omega (G)$ in $O(n^d)$ für eine Konstante d.
+
+Zur Eingabe G von Clique-Suchversion wende folgendes an:
+\begin{framed}
+FOR jede Kante $e \in E$ do
+	if $\omega (G - e ) = \omega (G)$
+	then $G := G - e$
+Return C := V(G) ohne isolierte Knoten
+\end{framed}
+
+Graph G = (V,E), e = c -- x
+a -- b
+a -- c
+b -- c
+c -- d
+c --x % fällt weg
+x -- y
+
+wird zu G - e = (V, E \\ {e})
+
+bei G - xy wird y isoliert.
+
+Im Beispiel: $\omega (G) = 3$
+G - cx -> $\omega = 3$
+G - bc -> $\omega = 2$
+
+
+Lösung a -- b -- c = C
+
+Laufzeit: $m \cdot O(n^d) = O(n^{d+2})$
+
+Gegenüberstellung "einfache Formulierung" vs "formale Formulierung"
+PRIM: "ist n prim?"
+genauer: 
+PRIM:
+Eingabe: Natürliche Zahl n
+Frage: ist n eine Primzahl?
+
+FORMAL: $PRIM = \{ bin(n) |  n \in N ist prim\} \subset {0,1}^+$\footnote{bin(n) - Binärdarstellung von n}
+Venn-Diagramm $PRIM \subset \{0,1\}^+$
+
+In der Praxis ermittelt man die Komplexität der Einfachheit halber mit uniformen Kostenmaß.
+Sortierung:
+Eingabe: $a_1, a_2,...,a_n$ beziehungsweise $bin(a_1) \# bin(a_2) \# ... \# bin(a_n) $ mit Ersetzung 
+Aufgabe: Sortiere Zahlen aufsteigend
+Mergesort: $O(n \cdot \log n)$
+Problem -> Eingabelänge (siehe oben, hatten wir schon)
+
+
 \bibliographystyle{alpha}
 \bibliography{literatur}
 \end{document}
