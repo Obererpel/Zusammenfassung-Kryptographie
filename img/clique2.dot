@@ -4,5 +4,4 @@ graph G {
 	b -- c [color=red]
 	c -- d
 	x -- y
-	d -- y
 }

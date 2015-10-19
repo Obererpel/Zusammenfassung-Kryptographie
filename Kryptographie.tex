@@ -11,6 +11,7 @@
 \usepackage{hyperref}
 \usepackage{framed}
 \usepackage{algpseudocode}
+\usepackage{tikz}
 
 \usepackage[labelformat=empty]{caption}
 \title{Zusammenfassung - Kryptographie}
@@ -177,54 +178,54 @@ Zur Eingabe G von Clique-Suchversion wende folgendes an:
 \end{description}
 
 
-\begin{table}[]
+\begin{table}[h]
 \centering
-\begin{tabular}{|l|l|l|}
+\begin{tabular}{|l|l|l|p{8cm}|}
 \hline
-$G$ & \includegraphics[width=0.2\textwidth,trim=0 0 0 -5]{img/clique1.png} &   Vollständiger Graph mit $C = \{a, b, c  \}$ \\ \hline
-$G - ex$ & \includegraphics[width=0.2\textwidth,trim=0 0 0 -5]{img/clique2.png} &   \\ \hline
-$G - xy$ & \includegraphics[width=0.2\textwidth,trim=0 0 0 -5]{img/clique3.png} &   \\ \hline
-$G - bc$ & \includegraphics[width=0.2\textwidth,trim=0 0 0 -5]{img/clique4.png} &  \\ \hline
+$G$ &  $\omega (G) = 3$ & \includegraphics[width=0.2\textwidth,trim=0 0 0 -5]{img/clique1.png} &   Vollständiger Graph \\ \hline
+$G_2 := G - cx$ &  $\omega (G) = 3$ & \includegraphics[width=0.2\textwidth,trim=0 0 0 -5]{img/clique2.png} & Nach Entfernen der Kante \emph{cx} hat sich die Cliquenzahl nicht geändert, die Knoten x und y sind isoliert.
+Die Kante \emph{ex} ist also nicht für die Clique notwendig. \\ \hline
+$G_3 := G_2 - bc $  & $\omega (G) = 2$  & \includegraphics[width=0.2\textwidth,trim=0 0 0 -5]{img/clique4.png} & Nach Entfernen der Kante \emph{bc} hat sich die Cliquenzahl verringert.
+ Offensichtlich wird \emph{bc} also für die Clique benötigt. \\ \hline
+$C := \{a,b,c\} $  & $\omega (G) = 3$  & \includegraphics[width=0.2\textwidth,trim=0 0 0 -5]{img/clique3.png} & Im weiteren Verlauf wird (offensichtlich) noch die Kante \emph{cd} entfernt. Anschließend werden die isolierten Knoten d, x und y entfernt und die Lösung $C := \{a,b,c\}$ zurückgegeben.\\ \hline
 \end{tabular}
 \end{table}
 
-Graph G = (V,E), e = c -- x %clique1.png
-a -- b
-a -- c
-b -- c
-c -- d
-c --x % fällt weg
-x -- y
+\textbf{Hinweis:} Ich bin mir nicht sicher, ob es sich um das korrekte Beispiel aus der Vorlesung handelt.\\
 
-wird zu G - e = (V, E \\ {e}) %clique2.png
+\textbf{Laufzeit:} $m \cdot O(n^d) = O(n^{d+2})$
 
-bei G - xy wird y isoliert. %clique3.png
+\subsubsection {Gegenüberstellung \glqq einfache Formulierung\grqq {} vs \glqq formale Formulierung\grqq}
+Die genaue Formulierung des Problems ist wichtig:
 
-Im Beispiel: $\omega (G) = 3$
-G - cx -> $\omega = 3$
-G - bc -> $\omega = 2$ %clique4.png
+\glqq Ist n prim?\grqq
+
+genauer:
+ 
+\begin{description}
+	\item[Eingabemenge:] Eine natürliche Zahl $n$
+	\item[Ausgabe:] Ist $n$ eine Primzahl? 
+	\item [Formal:] $PRIM \footnote{bin(n) - Binärdarstellung von n} = \{ bin(n) |  n \in N ist prim\} \subset \{0,1\}^+$
+\end{description}
 
 
-Lösung a -- b -- c = C
+Venn-Diagramm $PRIM \subset \{0,1\}^+$ TODO
+\def\firstcircle{(0,0) circle (1.5cm)}
+\def\secondcircle{(45:2cm) circle (1.5cm)}
 
-Laufzeit: $m \cdot O(n^d) = O(n^{d+2})$
+% Now we can draw the sets:
+\begin{tikzpicture}
+    \draw \firstcircle node[below] {$ \{0,1\}^+$};
+    \draw \secondcircle node [above] {$PRIM$};
 
-Gegenüberstellung "einfache Formulierung" vs "formale Formulierung"
-PRIM: "ist n prim?"
-genauer: 
-PRIM:
-Eingabe: Natürliche Zahl n
-Frage: ist n eine Primzahl?
 
-FORMAL: $PRIM = \{ bin(n) |  n \in N ist prim\} \subset {0,1}^+$\footnote{bin(n) - Binärdarstellung von n}
-Venn-Diagramm $PRIM \subset \{0,1\}^+$
+    \begin{scope}
+      \clip \firstcircle;
+      \fill[red] \secondcircle;
+    \end{scope}
 
-In der Praxis ermittelt man die Komplexität der Einfachheit halber mit uniformen Kostenmaß.
-Sortierung:
-Eingabe: $a_1, a_2,...,a_n$ beziehungsweise $bin(a_1) \# bin(a_2) \# ... \# bin(a_n) $ mit Ersetzung 
-Aufgabe: Sortiere Zahlen aufsteigend
-Mergesort: $O(n \cdot \log n)$
-Problem -> Eingabelänge (siehe oben, hatten wir schon)
+
+\end{tikzpicture}
 
 
 \subsection{ P, PN, NPC}
@@ -241,4 +242,15 @@ Grundlegende Probleme in P.
 
 \bibliographystyle{alpha}
 \bibliography{literatur}
+
+\begin{framed}
+\textbf{Übrige Notizen}
+
+In der Praxis ermittelt man die Komplexität der Einfachheit halber mit uniformen Kostenmaß.
+Sortierung:
+Eingabe: $a_1, a_2,...,a_n$ beziehungsweise $bin(a_1) \# bin(a_2) \# ... \# bin(a_n) $ mit Ersetzung 
+Aufgabe: Sortiere Zahlen aufsteigend
+Mergesort: $O(n \cdot \log n)$
+Problem -> Eingabelänge (siehe oben, hatten wir schon)
+\end{framed}
 \end{document}
