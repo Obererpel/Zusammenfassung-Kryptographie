@@ -78,7 +78,7 @@ Sei nun $L$ die maximale Wortlänge\footnote{An dieser Stelle habe ich mit Förm
 \begin{equation}
 L := max_{i=1}^n \log a_i
 \end{equation}
-Hier sollte ergänzt werden, wie man auf das $O(N^3)$ kommt.
+Hier sollte ergänzt werden, wie man auf das $\mathcal{O}(N^3)$ kommt.
 
 \subsubsection{Primzahl}
 \begin{description}
@@ -102,11 +102,11 @@ Ein naiver Algorithmus wird im Folgenden beschrieben.
 \end{algorithmic}
 
 Die Komplexität lässt sich wie folgt herleiten:
-Für die Verzweigungen (Zeilen 1 und 5), sowie für die return-Statements in den Zeilen 2 und 6 ist eine beschränkte Komplexität $O(1)$ anzunehmen.
-Alle Statements in der for-Schleife werden $n-2$ mal wiederholt, die Komplexität ist $O(n)$.
+Für die Verzweigungen (Zeilen 1 und 5), sowie für die return-Statements in den Zeilen 2 und 6 ist eine beschränkte Komplexität $\mathcal{O}(1)$ anzunehmen.
+Alle Statements in der for-Schleife werden $n-2$ mal wiederholt, die Komplexität ist $\mathcal{O}(n)$.
 
-Die daraus resultierende Komplexität $O(n)$ ist äquivalent zu $O(2^{\log n})$.
-Weil $\log n$ der Eingabelänge N entspricht, ist die Komplexität entsprechend $O(2^N)$, also exponentiell.
+Die daraus resultierende Komplexität $\mathcal{O}(n)$ ist äquivalent zu $\mathcal{O}(2^{\log n})$.
+Weil $\log n$ der Eingabelänge N entspricht, ist die Komplexität entsprechend $\mathcal{O}(2^N)$, also exponentiell.
 Demnach ist der Algorithmus nicht effizient.
 
 \subsubsection{Cliquensuche im Graphen}
@@ -160,11 +160,11 @@ Ausgabe ist $\omega (G) =$ erstes k mit $A(G,k) = Ja$
 	\EndIf
 \EndFor
 \end{algorithmic}
-Laufzeit: $n \cdot O(n^c) = O(n^{c+1})$
+Laufzeit: $n \cdot \mathcal{O}(n^c) = \mathcal{O}(n^{c+1})$
 
 
 \item[zu (2):]: Sei A ein polyzeit Algorithmus für Clique-Zwischenversion.
-d.h. $A(G) = \omega (G)$ in $O(n^d)$ für eine Konstante d.
+d.h. $A(G) = \omega (G)$ in $\mathcal{O}(n^d)$ für eine Konstante d.
 
 Zur Eingabe G von Clique-Suchversion wende folgendes an:
 \begin{algorithmic}[1]
@@ -193,7 +193,7 @@ $C := \{a,b,c\} $  & $\omega (G) = 3$  & \includegraphics[width=0.2\textwidth,tr
 
 \textbf{Hinweis:} Ich bin mir nicht sicher, ob es sich um das korrekte Beispiel aus der Vorlesung handelt.\\
 
-\textbf{Laufzeit:} $m \cdot O(n^d) = O(n^{d+2})$
+\textbf{Laufzeit:} $m \cdot \mathcal{O}(n^d) = \mathcal{O}(n^{d+2})$
 
 \subsubsection {Gegenüberstellung \glqq einfache Formulierung\grqq {} vs \glqq formale Formulierung\grqq}
 Die genaue Formulierung des Problems ist wichtig:
@@ -205,7 +205,7 @@ genauer:
 \begin{description}
 	\item[Eingabemenge:] Eine natürliche Zahl $n$
 	\item[Ausgabe:] Ist $n$ eine Primzahl? 
-	\item [Formal:] $PRIM \footnote{bin(n) - Binärdarstellung von n} = \{ bin(n) |  n \in N ist prim\} \subset \{0,1\}^+$
+	\item [Formal:] $PRIM \footnote{bin(n) - Binärdarstellung von n} = \{ bin(n) |  n \in N$ ist prim$\} \subset \{0,1\}^+$
 \end{description}
 
 
@@ -229,14 +229,13 @@ Venn-Diagramm $PRIM \subset \{0,1\}^+$ TODO (Und offensichtlich falsch, da ich n
 
 
 \subsection{ P, PN, NPC}
-P = Menge aller Entscheidungsprobleme, für die ein (deterministischer) polynomialzeit-Algorithmus existiert (formal via Deterministischer Turing Maschine), "effizient lösbare Probleme"
+P = Menge aller \emph{Entscheidungsprobleme}, für die ein (deterministischer) polynomialzeit-Algorithmus existiert (formal via Deterministischer Turing Maschine, \glqq effizient lösbare Probleme\grqq).
+Ein \emph{Optimierungsproblem} ist lösbar, wenn die entsprechende Entscheidungsversion in P ist.
 
-Ein Optimierungsprolbem ist lösbar, wenn die entsprechende Entscheidungsversion in P ist.
-
-Grundlegende Probleme in P.
+\subsubsection{Grundlegende Probleme in P}
 \begin{itemize}
 \item\textbf{Sortieren}
-\item\textbf{PRIM} - Allerdings nicht der vorgestellte Algorithmus. Effizienter Algorithmus wurde 2002 vorgestellt. Komplexität $O(\log n)^{12})$, zur Zeit sogar $O(\log n)^{6})$\url{ https://de.wikipedia.org/wiki/AKS-Primzahltest}
+\item\textbf{PRIM} - Allerdings nicht der vorgestellte Algorithmus. Effizienter Algorithmus wurde 2002 vorgestellt. Komplexität $\mathcal{O}(\log n)^{12})$, zur Zeit sogar $\mathcal{O}(\log n)^{6})$\url{ https://de.wikipedia.org/wiki/AKS-Primzahltest}
 \item\textbf{2-SAT}  (Modellierung mit Graphenproblem für Beweis)
 \end{itemize}
 
@@ -250,7 +249,7 @@ In der Praxis ermittelt man die Komplexität der Einfachheit halber mit uniforme
 Sortierung:
 Eingabe: $a_1, a_2,...,a_n$ beziehungsweise $bin(a_1) \# bin(a_2) \# ... \# bin(a_n) $ mit Ersetzung 
 Aufgabe: Sortiere Zahlen aufsteigend
-Mergesort: $O(n \cdot \log n)$
+Mergesort: $\mathcal{O}(n \cdot \log n)$
 Problem -> Eingabelänge (siehe oben, hatten wir schon)
 \end{framed}
 \end{document}
