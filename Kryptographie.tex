@@ -126,25 +126,29 @@ Demnach ist der Algorithmus nicht effizient.
 \end{description} 
 \end{framed}
 
-\textbf{Behauptung:} Wenn CLIQUE (Entscheidungsproblem) in polynomieller Zeit lösbar ist, so ist auch die Suchversion von CLIQUE in polynomieller Zeit lösbar.\footnote{In polynomieller Zeit, abhängig von der Knotenzahl |V| des Graphen}
+\textbf{Behauptung:} Wenn CLIQUE (Entscheidungsproblem) in polynomieller Zeit lösbar ist, so ist auch die Suchversion von CLIQUE in polynomieller Zeit lösbar.\footnote{In polynomieller Zeit, abhängig von der Knotenzahl $|V|$ des Graphen}
 
-\textbf{Beweis}\\
+\textbf{Beweis}
 \begin{description}
 \item[$\Leftarrow$] Zur Eingabe (G,k) von CLIQUE  bestimmen wir zunächst mit dem Algorithmus für CLIQUE-Suchversion eine größte Clique C von G.
-Dann vergleichen $|C| \geq k$? Ausgabe JA, falls $|C| \geq k$ sonst NEIN
-Laufzeit: Wie Laufzeit für Clique-Suchversion.
+Es wird verglichen, ob $|C| \geq k$ gilt.
+Ist dies der Fall, gibt der Algorithmus \emph{Ja} zurück, andernfalls \emph{Nein}.
+Die Laufzeit entspricht offensichtlich der Clique-Suchversion.
+
 \item[$\Rightarrow$] Betrachte folgende Zwischenversion für CLIQUE:
-Betrachte folgende Zwischenversion für CLIQUE:
+Betrachte folgende Zwischenversion für CLIQUE\footnote{$\omega(G) = max \{|C|: C$ ist eine Clique in $G\}$ ist die Cliquenzahl}:
 \begin{framed}
 \textbf{CLIQUE-Zwischenversion:}
 \begin{description}
 \item  [Eingabe:]Graph G=(V,E)
-\item [Aufgabe:] Bestimme die maximalzahl $\omega (G)$\footnote{$\omega(G) = max \{|C|: C ist eine Clique in G\}$ ist die Cliquenzahl} von paarweise verbundenen Knoten in G
+\item [Aufgabe:] Bestimme die Maximalzahl $\omega (G)$  von paarweise verbundenen Knoten in G
 \end{description}
 \end{framed}
 \end{description}
-\textbf{Behauptung:} CLIQUE in polynomieller Zeit lösbar $\Rightarrow^{(1)}$ CLIQUE-Zwischenversion in polizeit lösbar $\Rightarrow^{(2)}$ CLIQUE-Suchversion in polynomieller Zeit lösbar.
-zu (1): Sei A ein polizeit-Algorithmus für CLIQUE.
+\textbf{Behauptung:} CLIQUE in polynomieller Zeit lösbar $\Rightarrow^{(1)}$ CLIQUE-Zwischenversion in polynomieller Zeit $\Rightarrow^{(2)}$ CLIQUE-Suchversion in polynomieller Zeit lösbar.
+
+\begin{description}
+\item[zu (1):] Sei A ein Algorithmus für CLIQUE in polynomieller Zeit.
 Zur Eingabe G von CLIQUE-Zwischenversion wende A auf Eingaben $(G,n), (G,n-1),...,(G,1)$ an!
 Ausgabe ist $\omega (G) =$ erstes k mit $A(G,k) = Ja$
 
@@ -155,19 +159,34 @@ Ausgabe ist $\omega (G) =$ erstes k mit $A(G,k) = Ja$
 	\EndIf
 \EndFor
 \end{algorithmic}
-Laufzeit: $n \cdot O(n^c) = O(n^{c+1}$
+Laufzeit: $n \cdot O(n^c) = O(n^{c+1})$
 
 
-(2): Sei A ein polyzeit Algorithmus für Clique-Zwischenversion.
+\item[zu (2):]: Sei A ein polyzeit Algorithmus für Clique-Zwischenversion.
 d.h. $A(G) = \omega (G)$ in $O(n^d)$ für eine Konstante d.
 
 Zur Eingabe G von Clique-Suchversion wende folgendes an:
-\begin{framed}
-FOR jede Kante $e \in E$ do
-	if $\omega (G - e ) = \omega (G)$
-	then $G := G - e$
-Return C := V(G) ohne isolierte Knoten
-\end{framed}
+\begin{algorithmic}[1]
+\For {jede Kante $e \in E$ }
+	\If{ $\omega (G - e ) = \omega (G)$}
+	 $G := G - e$
+	\EndIf
+\EndFor
+\State \Return {C := V(G) ohne isolierte Knoten}
+\end{algorithmic}
+\end{description}
+
+
+\begin{table}[]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+$G$ & \includegraphics[width=0.2\textwidth,trim=0 0 0 -5]{img/clique1.png} &   Vollständiger Graph mit $C = \{a, b, c  \}$ \\ \hline
+$G - ex$ & \includegraphics[width=0.2\textwidth,trim=0 0 0 -5]{img/clique2.png} &   \\ \hline
+$G - xy$ & \includegraphics[width=0.2\textwidth,trim=0 0 0 -5]{img/clique3.png} &   \\ \hline
+$G - bc$ & \includegraphics[width=0.2\textwidth,trim=0 0 0 -5]{img/clique4.png} &  \\ \hline
+\end{tabular}
+\end{table}
 
 Graph G = (V,E), e = c -- x %clique1.png
 a -- b
@@ -208,7 +227,7 @@ Mergesort: $O(n \cdot \log n)$
 Problem -> Eingabelänge (siehe oben, hatten wir schon)
 
 
-% Nächster abschnitt
+\subsection{ P, PN, NPC}
 P = Menge aller Entscheidungsprobleme, für die ein (deterministischer) polynomialzeit-Algorithmus existiert (formal via Deterministischer Turing Maschine), "effizient lösbare Probleme"
 
 Ein Optimierungsprolbem ist lösbar, wenn die entsprechende Entscheidungsversion in P ist.

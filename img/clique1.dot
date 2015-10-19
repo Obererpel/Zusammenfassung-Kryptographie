@@ -5,4 +5,5 @@ graph G {
 	c -- d 
 	c -- x
 	x -- y
+	d -- y
 }

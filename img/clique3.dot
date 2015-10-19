@@ -5,4 +5,5 @@ graph G {
 	b -- c [color=red]
 	c -- d
 	c -- x 
+	d -- y
 }
