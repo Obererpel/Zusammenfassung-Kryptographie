@@ -74,11 +74,16 @@ $0 \rightarrow 00$
 $\$ \rightarrow 01$
 Die resultierende Kodierung wäre nun:
 11001111\textbf{01}11110011\textbf{01}11111100000011.
-Sei nun $L$ die maximale Wortlänge\footnote{An dieser Stelle habe ich mit Förmi geschnattert und weiß daher nicht, ob das so korrekt ist}.
+Sei nun $L$ die maximale Wortlänge, d.h. die größte Binärdarstellung der Eingabezahlen $a_i$.
 \begin{equation}
 L := max_{i=1}^n \log a_i
 \end{equation}
-Hier sollte ergänzt werden, wie man auf das $\mathcal{O}(N^3)$ kommt.
+Daraus folgt für Bubblesort:
+\begin{alignat*}{2}
+\mathcal{O}(n^2) &&= \mathcal{O}(L \cdot n^2) &\quad\mid \text{Algo. $n$-mal durchlaufen mit max. Eingabelänge $L$ als obere Abschätzung}\\
+				 &&= \mathcal{O}(N \cdot N^2) &\quad\mid L \leq N \text{(offensichtlich wegen $N := \sum_{i=1}^{n}\log a_i$)}\\
+				 &&= \mathcal{O}(N^3) &\quad\mid n \leq N\footnote{$N = n$, wenn alle $a_i$ die Binärdarstellung $1$ haben. Ansonsten ist Binärdarstellung länger $\Rightarrow  N \geq n$}\\
+\end{alignat*}
 
 \subsubsection{Primzahl}
 \begin{description}
@@ -112,7 +117,7 @@ Demnach ist der Algorithmus nicht effizient.
 \subsubsection{Cliquensuche im Graphen}
 
 \begin{framed}
-\textbf{CLIQUE}\\
+\textbf{CLIQUE}  {\tiny(gehört zu den Entscheidungsproblemen)}\\
 \begin{description}
 	\item[Eingabemenge:] Graph $G= (V,E)$ und $k \in N$
 	\item[Ausgabe:] Hat G mindestens paarweise verbundene Knoten (eine Clique C mit $\geq k$ Knoten)?
@@ -120,10 +125,10 @@ Demnach ist der Algorithmus nicht effizient.
 \end{framed}
 
 \begin{framed}
-\textbf{CLIQUE (Suchproblem)}\\
+\textbf{CLIQUE (Suchproblem)} {\tiny(gehört zu den Optimierungsproblemen)}\\
 \begin{description}
 	\item[Eingabemenge:] Graph $G= (V,E)$
-	\item[Ausgabe:] !!!!!!!!!!!!!!ERGÄNZEN!!!!!!!!!!!!!!!!
+	\item[Ausgabe:] Bestimme eine Clique C in G mit maximaler Knotenzahl.
 \end{description} 
 \end{framed}
 
@@ -178,12 +183,12 @@ Zur Eingabe G von Clique-Suchversion wende folgendes an:
 \end{description}
 
 
-\begin{table}[h]
+\begin{table}[!htp]
 \centering
 \begin{tabular}{|l|l|l|p{8cm}|}
 \hline
 $G$ &  $\omega (G) = 3$ & \includegraphics[width=0.2\textwidth,trim=0 0 0 -5]{img/clique1.png} &   Vollständiger Graph \\ \hline
-$G_2 := G - cx$ &  $\omega (G) = 3$ & \includegraphics[width=0.2\textwidth,trim=0 0 0 -5]{img/clique2.png} & Nach Entfernen der Kante \emph{cx} hat sich die Cliquenzahl nicht geändert, die Knoten x und y sind isoliert.
+$G_2 := G - cx$ &  $\omega (G) = 3$ & \includegraphics[width=0.2\textwidth,trim=0 0 0 -5]{img/clique2.png} & Nach Entfernen der Kante \emph{cx} hat sich die Cliquenzahl nicht geändert.
 Die Kante \emph{ex} ist also nicht für die Clique notwendig. \\ \hline
 $G_3 := G_2 - bc $  & $\omega (G) = 2$  & \includegraphics[width=0.2\textwidth,trim=0 0 0 -5]{img/clique4.png} & Nach Entfernen der Kante \emph{bc} hat sich die Cliquenzahl verringert.
  Offensichtlich wird \emph{bc} also für die Clique benötigt. \\ \hline
@@ -195,6 +200,7 @@ $C := \{a,b,c\} $  & $\omega (G) = 3$  & \includegraphics[width=0.2\textwidth,tr
 
 \textbf{Laufzeit:} $m \cdot \mathcal{O}(n^d) = \mathcal{O}(n^{d+2})$
 
+\newpage
 \subsubsection {Gegenüberstellung \glqq einfache Formulierung\grqq {} vs \glqq formale Formulierung\grqq}
 Die genaue Formulierung des Problems ist wichtig:
 
@@ -210,29 +216,23 @@ genauer:
 
 
 Venn-Diagramm $PRIM \subset \{0,1\}^+$ TODO (Und offensichtlich falsch, da ich noch keinen Plan von TIKZ habe)
-\def\firstcircle{(0,0) circle (1.5cm)}
-\def\secondcircle{(45:2cm) circle (1.5cm)}
 
 % Now we can draw the sets:
 \begin{tikzpicture}
-    \draw \firstcircle node[below] {$ \{0,1\}^+$};
-    \draw \secondcircle node [above] {$PRIM$};
-
-
-    \begin{scope}
-      \clip \firstcircle;
-      \fill[red] \secondcircle;
-    \end{scope}
-
-
+	\begin{scope}
+		\draw[fill=white, draw = black] (0,0) circle (3);
+		\draw[fill=red, draw = black] (-1,0) circle (1.5);
+		\node at (-1,0) (A) {\large\textbf{$PRIM$}};
+		\node at (1.5,1) (B) {\large\textbf{$\{0,1\}^+$}};
+	\end{scope}
 \end{tikzpicture}
 
 
-\subsection{ P, PN, NPC}
-P = Menge aller \emph{Entscheidungsprobleme}, für die ein (deterministischer) polynomialzeit-Algorithmus existiert (formal via Deterministischer Turing Maschine, \glqq effizient lösbare Probleme\grqq).
+\subsection{$\mathbb{P}$, $\mathbb{NP}$, $\mathbb{NP}$-vollständig}
+$\mathbb{P}$ = Menge aller \emph{Entscheidungsprobleme}, für die ein (deterministischer) polynomialzeit-Algorithmus existiert (formal via Deterministischer Turing Maschine, \glqq effizient lösbare Probleme\grqq).
 Ein \emph{Optimierungsproblem} ist lösbar, wenn die entsprechende Entscheidungsversion in P ist.
 
-\subsubsection{Grundlegende Probleme in P}
+\subsubsection{Grundlegende Probleme in $\mathbb{P}$}
 \begin{itemize}
 \item\textbf{Sortieren}
 \item\textbf{PRIM} - Allerdings nicht der vorgestellte Algorithmus. Effizienter Algorithmus wurde 2002 vorgestellt. Komplexität $\mathcal{O}(\log n)^{12})$, zur Zeit sogar $\mathcal{O}(\log n)^{6})$\url{ https://de.wikipedia.org/wiki/AKS-Primzahltest}
