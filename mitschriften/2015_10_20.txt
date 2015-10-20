@@ -99,3 +99,10 @@ $|F| = |V| + |E|$
 Wenn Belegung für F existiert, so ist G 2-färbbar
 										
 n_i \rightarrow Knoten n ist in Farbe i gefärbt.
+
+Max 2-sat
+Eingabe: 2-knf F: k_1 \wedge k_2 \wedge ... \wedge k_m, |k_i| = 2 und k \in \mathcal{N}
+Frage: \exists Belegung der Variablen, sodass \geq k Klauseln von F erfüllbar sind, d.h. b(K_i) = 1 für mindestens k Klauseln.
+
+Knapsack "Rucksackproblem"
+Aus SubSetSum wird gerne mal Knapsack
