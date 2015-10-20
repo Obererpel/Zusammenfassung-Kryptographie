@@ -1,0 +1,101 @@
+2.Sat (Abbildung auf Graphenproblem): $(x_1 \vee x_2) \wedge (x_1 \vee \neg x_3) \wedge ...$
+
+G(F) Knoten: $x_1 ,x_2, x_3... \neg x_1 \neg x_2 \neg x_3$ F ist erfüllbar $\Leftrightarrow \forall i : x_i und \neg x_i$ liegen nicht im gleichen stark ZK von G(F)
+
+Färbungsproblem
+Definition (k-Färbung im Skript)
+
+Beispiel: Graph 5-eck "mit Schwanz",
+k = 3, \{1,2,3\} 
+Färbung 1 - 2 - 1 - 3 - 2 (5-eck) und 1 (Schwanz)
+Chromatische Zahl $\Chi = 3$
+$\Chi(G) \geq \omega(G)$
+Im Beispiel ist $\omega = 2$
+
+Färbung(s-Problem)
+\begin{description}
+\item[Eingabe:] Graphen G, $k \in N$
+\item[Frage:] ist G k-färbbar
+\end{description}
+
+Ist die Entscheidungsversion von:
+
+Chromatische Zahl
+\begin{description}
+\item[Eingabe:] Graphen G
+\item[Aufgabe:] Bestimmte $\Chi(G)$
+\end{description}
+
+Nur 2-Färbung in polynomieller Zeit möglich.
+
+Kürzester Weg bei negativen Kantenlängen NP-Vollständig!
+
+Mincut:
+Schnitt $V = A \cup B, A,B \neq \emptyset$
+$E (A,B) = \{e \in E | e \cap A \neq \emptyset, e \cap B \neq \emptyset \}$
+
+Maxflow:
+Gibt es genug Beispiele im Buch, bla
+Kante | Kapazität | Fluss
+s -> a 10 9
+s -> b 10 9
+a -> t 20 8
+a -> b 2 2
+b -> t 30 10
+t -> s  ? 5
+
+$K: E \rightarrow \mathcal{R}^{\geq 0}$
+$f: E \rightarrow \mathcal{R}^{\geq 0}$
+$wert(f) = 9 + 9 - 5 = 13 $
+$= 10 + 8 -5$
+$= 13$
+
+Linear Program (Entscheidungsversion)
+LP: $max 3x_1 + 2x_2$
+Nebenbedingung $x_2 \leq 5 \\ 4x_1 - x_2 \leq 3 \\ x_1, x_2 \geq 20$
+$x = vector x_1 x_2 $
+$b = vector 5, 3$
+$c = vector 3, 2$
+$A = Matrix 0 1 \\ 4 -1$
+$c^T \cdot x$
+Ellipsoidmethode ermöglicht polynomielle Zeit; in der Praxis wird jedoch Simplex verwendet.
+
+Polynomielle Reduktion
+2xVenn-Diagramm $\Sigma^*$ mit Teilmenge L und $\Gamma^*$ mit Teilmenge M mit Pfeilen von W nach f(W)
+
+Annahme: $M \in P$
+Löse L in polyzeit:
+\begin{itemize}
+\item W Eingabe für L: Berechne f(w) in polynomieller Zeit
+\item Entscheide, ob $f(w) \in M$ in polynomieller Zeit
+\item Wenn ja, dann $w \in L$, wenn nein, dann $w \not\in L$
+\end{itemzie}
+
+Nochmal 2-Färbung
+Eingabe Graph G=(V,E)
+Frage: ist g 2-färbbar?
+
+Und 2-Sat
+Eingabe: 2-KNF F 
+Frage: ist F erfüllbar?
+
+2-Färbung \leq_p 2-SAT:
+\begin{itemize}
+\item Für jeden Knoten $v \in V$ führe zwei Variablen $v_1, v_2$ ein
+\item Vorhaben $v_i$ ist wahr $\Leftrightarrow$ V ist mit Farbe i gefärbt
+\item $V \rightarrow (v_1 \vee v_2) \wedge (\not v_1  \vee \not v_2)$
+\end{itemize}
+										Für Knoten:
+Graph G a -- b -- c -- d -- a -> F:= 	(a_1 \vee a_2) \wedge (\neg a_1 \vee \neg a_2) \wedge \\
+										(b_1 \vee b_2) \wedge (\neg b_1 \vee \neg b_2) \wedge \\
+										(c_1 \vee c_2) \wedge (\neg c_1 \vee \neg c_2) \wedge \\
+										(d_1 \vee d_2) \wedge (\neg d_1 \vee \neg d_2) \wedge \\
+										Für Kanten
+										(\not a_1 \vee \not b_2) \wedge (\neg a_2 \vee \neg b_2) \wedge \\
+										(\not b_1 \vee \not c_2) \wedge (\neg b_2 \vee \neg c_2) \wedge \\
+										(\not c_1 \vee \not d_2) \wedge (\neg c_2 \vee \neg d_2) \wedge \\
+										(\not d_1 \vee \not a_2) \wedge (\neg d_2 \vee \neg a_2)
+$|F| = |V| + |E|$
+Wenn Belegung für F existiert, so ist G 2-färbbar
+										
+n_i \rightarrow Knoten n ist in Farbe i gefärbt.
