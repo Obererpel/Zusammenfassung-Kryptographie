@@ -1,0 +1,8 @@
+digraph G {
+	s -> a [label="10 | 9"]
+	s -> b [label="10 | 9"]
+	a -> t [label="20 | 8"]
+	a -> b [label="2 | 2"]
+	b -> t [label="30 | 10"]
+	t -> s [label="- | 5"]
+}
