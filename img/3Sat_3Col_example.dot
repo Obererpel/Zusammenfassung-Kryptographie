@@ -1,0 +1,90 @@
+graph G {
+	x1 [label=<x<SUB>1</SUB>>, fillcolor=lightgrey, style=filled]
+	nx1 [label=<&not;x<SUB>1</SUB>>]
+	
+	x2 [label=<x<SUB>2</SUB>>, fillcolor=lightgrey, style=filled]
+	nx2 [label=<&not;x<SUB>2</SUB>>]
+	
+	x3 [label=<x<SUB>3</SUB>>, fillcolor=lightgrey, style=filled]
+	nx3 [label=<&not;x<SUB>3</SUB>>]
+	
+	x4 [label=<x<SUB>4</SUB>>, fillcolor=lightgrey, style=filled]
+	nx4 [label=<&not;x<SUB>4</SUB>>]
+	
+	R [label=" ", fillcolor=black, style=filled]
+	
+	x1 -- nx1
+	x1 -- R
+	nx1 -- R
+	
+	x2 -- nx2
+	x2 -- R
+	nx2 -- R
+	
+	x3 -- nx3
+	x3 -- R
+	nx3 -- R
+	
+	x4 -- nx4
+	x4 -- R
+	nx4 -- R
+	
+	
+	// KLAUSEL 1
+	node [color=green]
+	l11 [label=<x<SUB>1</SUB>>]
+	l12 [label=<&not;x<SUB>2</SUB>>, fillcolor=lightgrey, style=filled]
+	l13 [label=<&not;x<SUB>3</SUB>>, fillcolor=lightgrey, style=filled]
+	d1 [label=<d<SUB>1</SUB>>, fillcolor=black, fontcolor=white, style=filled]
+	e1 [label=<e<SUB>1</SUB>>]
+	
+	subgraph cluster_k_1 {
+		color=white
+		l11 -- l12 -- d1 -- l11
+		d1 -- e1 -- l13;
+		// label = <K<SUB>1</SUB>>;
+	}
+	
+	l11 -- x1
+	l12 -- nx2
+	l13 -- nx3
+	
+	
+	// KLAUSEL 2
+	node [color=red]
+	l21 [label=<&not;x<SUB>1</SUB>>, fillcolor=lightgrey, style=filled]
+	l22 [label=<x<SUB>2</SUB>>]
+	l23 [label=<x<SUB>3</SUB>>, fillcolor=black, fontcolor=white, style=filled]
+	d2 [label=<d<SUB>2</SUB>>, fillcolor=black, fontcolor=white, style=filled]
+	e2 [label=<e<SUB>2</SUB>>]
+	
+	subgraph cluster_k_2 {
+		color=white
+		l21 -- l22 -- d2 -- l21
+		d2 -- e2 -- l23;
+		// label = <K<SUB>2</SUB>>;
+	}
+	
+	l21 -- nx1
+	l22 -- x2
+	l23 -- x3
+	
+	// KLAUSEL 3
+	node [color=blue]
+	l31 [label=<x<SUB>1</SUB>>]
+	l32 [label=<x<SUB>2</SUB>>, fillcolor=black, fontcolor=white, style=filled]
+	l33 [label=<x<SUB>4</SUB>>, fillcolor=black, fontcolor=white, style=filled]
+	d3 [label=<d<SUB>3</SUB>>, fillcolor=lightgrey, style=filled]
+	e3 [label=<e<SUB>3</SUB>>]
+	
+	subgraph cluster_k_2 {
+		color=white
+		l31 -- l32 -- d3 -- l31
+		d3 -- e3 -- l33;
+		// label = <K<SUB>2</SUB>>;
+	}
+	
+	l31 -- x1
+	l32 -- x2
+	l33 -- x4
+}

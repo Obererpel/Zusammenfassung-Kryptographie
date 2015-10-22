@@ -36,13 +36,7 @@ $E (A,B) = \{e \in E | e \cap A \neq \emptyset, e \cap B \neq \emptyset \}$
 
 Maxflow:
 Gibt es genug Beispiele im Buch, bla
-Kante | Kapazität | Fluss
-s -> a 10 9
-s -> b 10 9
-a -> t 20 8
-a -> b 2 2
-b -> t 30 10
-t -> s  ? 5
+% Grafik max_flow.png
 
 $K: E \rightarrow \mathcal{R}^{\geq 0}$
 $f: E \rightarrow \mathcal{R}^{\geq 0}$

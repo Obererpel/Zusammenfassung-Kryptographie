@@ -1,0 +1,35 @@
+graph G {
+	l11 [label=<x<SUB>1</SUB>>, style=filled]
+	l12 [label=<&not; x<SUB>2</SUB>>]
+	l13 [label=<&not;x<SUB>3</SUB>>]
+	subgraph cluster_k_1 {
+		node [style=filled];
+		l11 -- l12 -- l13 -- l11
+		label = <K<SUB>1</SUB>>;
+	}
+	
+	l21 [label=<&not; x<SUB>1</SUB>>]
+	l22 [label=<x<SUB>2</SUB>>, style=filled]
+	l23 [label=<x<SUB>3</SUB>>]
+	subgraph cluster_k_2 {
+		node [style=filled];
+		l21 -- l22 -- l23 -- l21
+		label = <K<SUB>2</SUB>>;
+	}
+	
+	l31 [label=<x<SUB>1</SUB>>]
+	l32 [label=<x<SUB>2</SUB>>]
+	l33 [label=<x<SUB>4</SUB>>, style=filled]
+	subgraph cluster_k_3 {
+		node [style=filled];
+		l31 -- l32 -- l33 -- l31
+		label = <K<SUB>3</SUB>>;
+	}
+	
+	l11 -- l21
+	l12 -- l22
+	l13 -- l23
+	
+	l21 -- l31
+	l12 -- l32
+}

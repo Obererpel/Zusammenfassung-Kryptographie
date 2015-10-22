@@ -19,14 +19,7 @@ Konstruiere Graphen G und Zahl k aus Formel F wie folgt:
 \item zwei Kanten aus verschiedenen Klauselmengen sind verbunden, wenn die entsprechenden Literale nicht zueinander komplementär sind.
 \end{itemize}
 Beispielgraph G: 
-x_1 -- \neg x_2 -- \neg x_3  --// Klausel 1
-\neg x_1 -- x_2 -- \x3	--// Klausel 2
-x_1 -- \neg x_1
-\neg x_2 -- x_2
-\neg x_3 -- x_3
-x_1 -- x_2 -- x_4 \\ [sic!] Klausel 3
-x_1 -- \neg x_1
-x_2 -- \neg x_2
+%Grafik 3Sat_Ind_Set.png
 
 Eingabe k für INDSET so definieren: $k:=m$ (Anzahl der Klauseln in F)
 
@@ -45,16 +38,12 @@ $b(l_{j,k}) = 1 \Rightarrow $\neg l_{j,k} \not\in U \rightarrow b(\neg l_{j,k}) 
 G wie folgt:
 \begin{itemzie}
 \item Literale entsprechen (Gleich mit Dach) Knoten:
-	x_1 -- \neg x_1
-	x_2 -- \neg x_2
-	x_3 -- \neg x_3
-	x_4 -- \neg x_4
-	R -- *
+% Grafik 3Sat_3Col_central.png
 Interpretation der Farben: 0:'falsch' 1:'wahr' und eine Farbe 2 für R
 
 \item Für jede Klausel K_j
-a_j -- b_j -- d_j -- a_j
-d_j -- e_j -- c_j
+% Grafik 3Sat_3Col_single_clause.png
+
 wenn K_j = (l_{j,1}, l_{j,2}, l_{j,3})
 dann Kanten a_j l_{j,1}, b_j l{j,2} und c_j l_{j,3}
 \item Zusätzlich zwei Knoten W(ahr) und F(alsch) mit R verbunden, sowie Kanten d_j -- F und e_j --F

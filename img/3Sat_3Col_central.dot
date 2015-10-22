@@ -1,0 +1,31 @@
+graph G {
+	x1 [label=<x<SUB>1</SUB>>, fillcolor=lightgrey, style=filled]
+	nx1 [label=<&not; x<SUB>1</SUB>>]
+	
+	x2 [label=<x<SUB>2</SUB>>, fillcolor=lightgrey, style=filled]
+	nx2 [label=<&not; x<SUB>2</SUB>>]
+	
+	x3 [label=<x<SUB>3</SUB>>, fillcolor=lightgrey, style=filled]
+	nx3 [label=<&not; x<SUB>3</SUB>>]
+	
+	x4 [label=<x<SUB>4</SUB>>, fillcolor=lightgrey, style=filled]
+	nx4 [label=<&not; x<SUB>4</SUB>>]
+	
+	R [label=" ", fillcolor=black, style=filled]
+	
+	x1 -- nx1
+	x1 -- R
+	nx1 -- R
+	
+	x2 -- nx2
+	x2 -- R
+	nx2 -- R
+	
+	x3 -- nx3
+	x3 -- R
+	nx3 -- R
+	
+	x4 -- nx4
+	x4 -- R
+	nx4 -- R
+}

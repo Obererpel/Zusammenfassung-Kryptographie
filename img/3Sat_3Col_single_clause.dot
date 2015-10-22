@@ -1,0 +1,14 @@
+graph G {
+	l11 [label=<l<SUB>j,1</SUB>>]
+	l12 [label=<l<SUB>j,2</SUB>>]
+	l13 [label=<l<SUB>j,3</SUB>>]
+	d [label=<d<SUB>j</SUB>>]
+	e [label=<e<SUB>j</SUB>>]
+	
+	subgraph cluster_k_j {
+		node [style=filled];
+		l11 -- l12 -- d -- l11
+		d -- e -- l13;
+		label = <K<SUB>j</SUB>>;
+	}
+}
