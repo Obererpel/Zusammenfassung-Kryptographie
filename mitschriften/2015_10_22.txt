@@ -38,6 +38,7 @@ $b(l_{j,k}) = 1 \Rightarrow $\neg l_{j,k} \not\in U \rightarrow b(\neg l_{j,k}) 
 G wie folgt:
 \begin{itemzie}
 \item Literale entsprechen (Gleich mit Dach) Knoten:
+<<<<<<< HEAD
 % Grafik 3Sat_3Col_central.png
 Interpretation der Farben: 0:'falsch' 1:'wahr' und eine Farbe 2 für R
 
