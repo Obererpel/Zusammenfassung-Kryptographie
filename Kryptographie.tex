@@ -252,4 +252,85 @@ Aufgabe: Sortiere Zahlen aufsteigend
 Mergesort: $\mathcal{O}(n \cdot \log n)$
 Problem -> Eingabelänge (siehe oben, hatten wir schon)
 \end{framed}
+
+\subsection{$\mathbb{NP}$-Vollständigkeit Reduktionsbeispiele}
+\textbf{3-SAT $\leq_p$ INDSET}\\
+''$\Rightarrow$'':\\
+Eingabe: Sei $F = K_1 \wedge K_2 \wedge \ldots \wedge K_m$ und $K_j = (l_{j,1} \vee l_{j,2} \vee l_{j,3})$, wobei
+$l_{j,1}, l_{j,2}, l_{j,3} \in \{x_1, \ldots, x_n\} \cup \{\overline{x_1}, \ldots, \overline{x_3}\}$.\\
+\\
+\textit{Erklärung der Notation am Beispiel:}\\
+\[F = \underbrace{(x_1 \vee \overline{x_2} \vee \overline{x_3})}_{K_1} \wedge \underbrace{(\overline{x_1} \vee x_2 \vee x_3)}_{K_2} \wedge \underbrace{(x_1 \vee x_2 \vee x_4)}_{K_3}\]
+\[K_1: l_{1,1} = x_1; l_{1,2} = \overline{x_2}, \text{usw.}\]
+Der Beweis erfolgt in zwei Schritten:
+\begin{enumerate}
+	\item Konstruiere einen Graphen $G$ und eine natürliche Zahl $k$ aus der Formel $F$.
+	\item Zeige das der Graph eine unabhängige Knotenmenge $U$ mit $|U| = k$ hat.
+\end{enumerate}
+
+Konstruiere den Graphen $G$ wie folgt:
+\begin{itemize}
+	\item Literale entsprechen Knoten
+	\item Verbinde die drei Literale innerhalb einer Klausel $K_j$ miteinander
+	\item Verbinde die Knoten unterschiedlicher Klauseln, wenn die entsprechenden Literale zueinander komplementär sind (Bsp: $x_1$ mit $\overline{x_1}$)\\
+	\begin{figure}[!htp]
+		\centering
+		\includegraphics[scale=0.5]{img/3Sat_Ind_Set.png}
+		\caption{Beispiel Formel $F$: Verbinden Knoten der Knoten}
+	\end{figure}
+	\newpage
+	\item Setze $k$ wie folgt: $k = m$ (= die Anzahl der Klauseln in $F$)
+\end{itemize}
+
+Annahme: Sei $b$ eine erfüllende Belegung für $F$, d.h. in jeder Klausel $K_j$ existiert ein Literal $l_{j,k}$ mit $b(l_{j,k}) = 1$.\\
+Wähle in Graph $G$ aus jeder Klauselmenge genau einen Knoten mit entsprechendem wahren Literal. Aus der Konstruktion von $G$ folgt, das diese $k$ Knoten unverbunden sind und eine unabhängige Menge bilden.\\
+Am Beispiel: $b(x_1) = b(x_2) = 1; b(x_3) = b(x_4)$. Daraus folgen die ausgewählten Knoten $x_1, x_2 \text{und} \overline{x_3}$. Diese ergeben eine unabhängige Menge.\\
+\\
+''$\Leftarrow$'':\\
+Annahme: Sei $U$ eine unabhängige Menge von $G$ mit $|U| \geq k = m$ Knoten. Dann gilt $|U| = k$, weil jede der $m$ Klauselmengen ein Dreieck bildet, d.h. $|U  K_j| = 1$, für jede Klauselmenge $K_j$. $U$ definiert nun eine Belegung für $F$ wie folgt:
+\begin{alignat*}{2}
+b(l_{j,k}) &&= 1	&\quad\text{,falls } l_{j,k} \in U\\
+			&&=0	&\quad\text{,sonst}
+\end{alignat*}
+$b(l_{j,k}) = 1 \Rightarrow b(\overline{l_{j,k}}) \notin U \Rightarrow b(\overline{l_{j,k}}) = 0$\\
+$\Rightarrow$ F ist erfüllbar unter $b$!\\
+\\
+Beispiel Belegung: $b(x_1) = b(x_2) = b(x_3) = 0; b(x_4) = 1$\\
+\\
+\\
+\textbf{3-SAT $\leq_p$ 3-Färbung}\\
+Eingabe: Sei $F = K_1 \wedge K_2 \wedge \ldots \wedge K_m$ und $K_j = (l_{j,1} \vee l_{j,2} \vee l_{j,3})$, wobei
+$l_{j,1}, l_{j,2}, l_{j,3} \in \{x_1, \ldots, x_n\} \cup \{\overline{x_1}, \ldots, \overline{x_3}\}$.\\
+\\
+Beispiel: \[F = \underbrace{(x_1 \vee \overline{x_2} \vee \overline{x_3})}_{K_1} \wedge \underbrace{(\overline{x_1} \vee x_2 \vee x_3)}_{K_2} \wedge \underbrace{(x_1 \vee x_2 \vee x_4)}_{K_3}\]
+''$\Rightarrow$'': Graph $G$ ist 3-färbbar $\Rightarrow$ $F$ ist erfüllbar.\\
+\\
+Konstruiere den Graphen $G$ wie folgt:
+\begin{itemize}
+	\item Literale entsprechen Knoten und verbinde komplementäre Literale miteinander.
+	Idee: Füge einen Hilfsknoten $R$ ein (im Bild schwarz) und färbe diesen, sodass alle Literale $x_i$ und $\overline{x_i}$ mit genau zwei anderen Farben gefärbt werden müssen.
+	\begin{figure}[!htp]
+		\centering
+		\includegraphics[scale=0.5]{img/3Sat_3Col_central.png}
+		\caption{Einfügen des Hilfsknoten $R$}
+	\end{figure}
+	\newpage
+	\item Für jede Klausel $K_j$ konstruiere den folgenden Teilgraphen:
+	\begin{figure}[!htp]
+		\centering
+		\includegraphics[scale=0.5]{img/3Sat_3Col_single_clause.png}
+		\caption{Teilgraph für Klausel $K_j$ {\LARGE \color{red} In meinen Aufzeichnungen werden die $l$ Knoten durch $a,b$ und $c$ (=$l_3$) ersetzt?! }}
+	\end{figure}
+	\item Für $K_j = \{l_{j,1}, l_{j,2}, l_{j,3}\}$ füge die folgenden Kanten ein: $al_{j,1}, bl_{j,2}, cl_{j,3}$.
+	\item Füge nun zwei zusätzliche Knoten $W$ und $F$ ein, sowie die Kanten $RW, RF, FW$. Zusätzlich die Kanten $Fd_j, Fe_j$ für alle $j$.
+	\begin{figure}[!htp]
+		\centering
+		\includegraphics[scale=0.5]{img/3Sat_3Col_example.png}
+		\caption{Beispielgraph, konstruiert aus Formel $F$}
+	\end{figure}
+\end{itemize}
+\newpage
+''$\Leftarrow$'': Sei $F$ eine erfüllbare Formel (unter 3-SAT) $\Rightarrow$ Graph $G$ ist 3-färbbar.\\
+\\
+Sei $b$ eine erfüllende Belegung für $F$. Färbe nun alle Knoten $x_i$ mit $b(x_i)$ und alle Knoten $\overline{x_i}$ mit $b(\overline{x_i})$. Nun erweitern wir den Graphen auf 3 Farben indem wir zunächst die Knoten aller Klauseln $K_j$ färben. Abschließend werden $F, W$ und $R$ gefärbt. Dies ergibt eine 3-Färbung des Graphen.
 \end{document}
