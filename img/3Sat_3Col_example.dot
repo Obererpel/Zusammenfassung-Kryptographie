@@ -1,9 +1,9 @@
 graph G {
-	x1 [label=<x<SUB>1</SUB>>, fillcolor=lightgrey, style=filled]
-	nx1 [label=<&not;x<SUB>1</SUB>>]
+	x1 [label=<x<SUB>1</SUB>>]
+	nx1 [label=<&not;x<SUB>1</SUB>>, fillcolor=lightgrey, style=filled]
 	
-	x2 [label=<x<SUB>2</SUB>>, fillcolor=lightgrey, style=filled]
-	nx2 [label=<&not;x<SUB>2</SUB>>]
+	x2 [label=<x<SUB>2</SUB>>]
+	nx2 [label=<&not;x<SUB>2</SUB>>, fillcolor=lightgrey, style=filled]
 	
 	x3 [label=<x<SUB>3</SUB>>, fillcolor=lightgrey, style=filled]
 	nx3 [label=<&not;x<SUB>3</SUB>>]
@@ -11,7 +11,9 @@ graph G {
 	x4 [label=<x<SUB>4</SUB>>, fillcolor=lightgrey, style=filled]
 	nx4 [label=<&not;x<SUB>4</SUB>>]
 	
-	R [label=" ", fillcolor=black, style=filled]
+	R [label="R", fillcolor=black, style=filled, fontcolor=white]
+	F [label="F", fillcolor=lightgrey, style=filled]
+	W [label="W"]
 	
 	x1 -- nx1
 	x1 -- R
@@ -28,63 +30,73 @@ graph G {
 	x4 -- nx4
 	x4 -- R
 	nx4 -- R
+
+	F -- W
+	F -- R
+	W -- R
 	
 	
 	// KLAUSEL 1
 	node [color=green]
-	l11 [label=<x<SUB>1</SUB>>]
-	l12 [label=<&not;x<SUB>2</SUB>>, fillcolor=lightgrey, style=filled]
-	l13 [label=<&not;x<SUB>3</SUB>>, fillcolor=lightgrey, style=filled]
+	a1 [label=<a<SUB>1</SUB>>, fillcolor=lightgrey, style=filled]
+	b1 [label=<b<SUB>1</SUB>>]//, fillcolor=lightgrey, style=filled, fontcolor=white]
+	c1 [label=<c<SUB>1</SUB>>, fillcolor=black, fontcolor=white, style=filled]
 	d1 [label=<d<SUB>1</SUB>>, fillcolor=black, fontcolor=white, style=filled]
-	e1 [label=<e<SUB>1</SUB>>]
+	e1 [label=<e<SUB>1</SUB>>]//, fillcolor=black, fontcolor=white, style=filled]
 	
 	subgraph cluster_k_1 {
 		color=white
-		l11 -- l12 -- d1 -- l11
-		d1 -- e1 -- l13;
+		a1 -- b1 -- d1 -- a1
+		d1 -- e1 -- c1;
 		// label = <K<SUB>1</SUB>>;
 	}
 	
-	l11 -- x1
-	l12 -- nx2
-	l13 -- nx3
+	a1 -- x1
+	b1 -- nx2
+	c1 -- nx3
+	F -- d1
+	F -- e1
 	
 	
 	// KLAUSEL 2
 	node [color=red]
-	l21 [label=<&not;x<SUB>1</SUB>>, fillcolor=lightgrey, style=filled]
-	l22 [label=<x<SUB>2</SUB>>]
-	l23 [label=<x<SUB>3</SUB>>, fillcolor=black, fontcolor=white, style=filled]
+	a2 [label=<a<SUB>2</SUB>>]//, fillcolor=lightgrey, style=filled]
+	b2 [label=<b<SUB>2</SUB>>, fillcolor=lightgrey, style=filled]
+	c2 [label=<c<SUB>2</SUB>>, fillcolor=black, fontcolor=white, style=filled]
 	d2 [label=<d<SUB>2</SUB>>, fillcolor=black, fontcolor=white, style=filled]
-	e2 [label=<e<SUB>2</SUB>>]
+	e2 [label=<e<SUB>2</SUB>>]//, fillcolor=lightgrey, style=filled]
 	
 	subgraph cluster_k_2 {
 		color=white
-		l21 -- l22 -- d2 -- l21
-		d2 -- e2 -- l23;
+		a2 -- b2 -- d2 -- a2
+		d2 -- e2 -- c2;
 		// label = <K<SUB>2</SUB>>;
 	}
 	
-	l21 -- nx1
-	l22 -- x2
-	l23 -- x3
+	a2 -- nx1
+	b2 -- x2
+	c2 -- x3
+	F -- d2 
+	F -- e2
 	
 	// KLAUSEL 3
 	node [color=blue]
-	l31 [label=<x<SUB>1</SUB>>]
-	l32 [label=<x<SUB>2</SUB>>, fillcolor=black, fontcolor=white, style=filled]
-	l33 [label=<x<SUB>4</SUB>>, fillcolor=black, fontcolor=white, style=filled]
-	d3 [label=<d<SUB>3</SUB>>, fillcolor=lightgrey, style=filled]
-	e3 [label=<e<SUB>3</SUB>>]
+	a3 [label=<a<SUB>3</SUB>>, fillcolor=black, fontcolor=white, style=filled]
+	b3 [label=<b<SUB>3</SUB>>, fillcolor=lightgrey, style=filled]
+	c3 [label=<c<SUB>3</SUB>>]//, fillcolor=black, fontcolor=white, style=filled]
+	d3 [label=<d<SUB>3</SUB>>]//, fillcolor=black style=filled, fontcolor=white]
+	e3 [label=<e<SUB>3</SUB>>, fillcolor=black, fontcolor=white, style=filled]
 	
 	subgraph cluster_k_2 {
 		color=white
-		l31 -- l32 -- d3 -- l31
-		d3 -- e3 -- l33;
+		a3 -- b3 -- d3 -- a3
+		d3 -- e3 -- c3;
 		// label = <K<SUB>2</SUB>>;
 	}
 	
-	l31 -- x1
-	l32 -- x2
-	l33 -- x4
+	a3 -- x1
+	b3 -- x2
+	c3 -- x4
+	F -- d3 
+	F -- e3
 }
