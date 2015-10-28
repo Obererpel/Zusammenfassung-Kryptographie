@@ -12,6 +12,7 @@
 \usepackage{framed}
 \usepackage{algpseudocode}
 \usepackage{tikz}
+\usepackage{enumitem}
 
 \usepackage[labelformat=empty]{caption}
 \title{Zusammenfassung - Kryptographie}
@@ -333,4 +334,60 @@ Konstruiere den Graphen $G$ wie folgt:
 ''$\Leftarrow$'': Sei $F$ eine erfüllbare Formel (unter 3-SAT) $\Rightarrow$ Graph $G$ ist 3-färbbar.\\
 \\
 Sei $b$ eine erfüllende Belegung für $F$. Färbe nun alle Knoten $x_i$ mit $b(x_i)$ und alle Knoten $\overline{x_i}$ mit $b(\overline{x_i})$. Nun erweitern wir den Graphen auf 3 Farben indem wir zunächst die Knoten aller Klauseln $K_j$ färben. Abschließend werden $F, W$ und $R$ gefärbt. Dies ergibt eine 3-Färbung des Graphen.
+
+\section{Approximationsalgorithmen}
+\begin{framed}
+	\textbf{VertexCover (Entscheidungsversion):}
+	\begin{description}
+		\item  [Eingabe:]Graph $G=(V,E), k \in \mathbb{N}$
+		\item [Frage:] Hat $G$ ein VC $C$ mit $|C| \leq k$?
+	\end{description}
+\end{framed}
+Behauptung: VC ist $\mathbb{NP}$-vollständig.\\
+Beweis über poly. Reduktion: 3-SAT $\leq_p$ INDSET $\leq_p$ VC:\\
+Die Eingabe für INDSET sei $(G, k)$ und für VC $(G', k')$, wobei $G' = G$ und $k' = n - k; (n = |V(G)|)$
+\begin{itemize}
+	\item $G$ hat eine unabhängige Menge $U \subseteq V(G)$ mit $|U| \geq k$
+	\item $G'$ hat ein VC $C$ mit $|C| \leq k'$
+\end{itemize}
+\begin{figure}[!htp]
+	\centering
+	\caption{Füge Skizze ein}
+\end{figure}
+''$\Rightarrow$'': geg. sei ein $U$, zeige das Graph ein VC $C$ hat.\\
+$C := V(G) \backslash U$ ist ein VC mit $|C| = n-k = k'$\\
+\\
+''$\Leftarrow$'': geg. sei ein VC $C$, zeige das der Graph eine unabhängige Menge $U$ hat.\\
+$U := V(G') \backslash C$ ist eine unabhängige Menge in $G$ mit $|U| = n-k' = k$\\
+\\
+\textbf{Approximationsalgorithmus für MinVC}\\
+Gegeben sei der folgende Beispielgraph:
+\begin{figure}[!htp]
+	\centering
+	\caption{Beispielgraph Approximationsalgorithmen}
+\end{figure}\\
+Beispielhaftes Durchlaufen des Algorithmus:
+\begin{enumerate}
+	\item Wähle Kante $ab$ aus, sodass $E' = \{cv, uv, uw\}$
+	\item Wähle Kante $uv$ aus, sodass $E' = \emptyset$
+\end{enumerate}
+Daraus folgt das Ergebnis $C = \{a,b,u,w\}$\\
+\\
+\\
+\textbf{MaxCUT}\\
+Gegeben sei der folgende Beispielgraph:
+\begin{figure}[!htp]
+	\centering
+	\caption{Beispielgraph Approximationsalgorithmen}
+\end{figure}\\
+wobei $E(S, \overline{S}) = \{ac, bu, bc, vc, vu, wu\}$.\\
+Durchlaufen des Algorithmus liefert uns beispielsweise:
+\begin{enumerate}[label=\textbf{\arabic*. Schritt}:, leftmargin=8em]
+	\item $S = \{w\}, \quad \overline{S} = \emptyset$
+	\item $S = \{w\}, \quad \overline{S} = \{u\}$
+	\item $S = \{w, v\}, \quad \overline{S} = \{u\}$
+	\item $S = \{w, v\}, \quad \overline{S} = \{c, u\}$
+	\item $S = \{w, v, b\}, \quad \overline{S} = \{c, u\}$
+	\item $S = \{w, v, b, a\}, \quad \overline{S} = \{c, u\}$
+\end{enumerate}
 \end{document}
