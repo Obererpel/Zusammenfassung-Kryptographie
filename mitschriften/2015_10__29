@@ -1,0 +1,80 @@
+Übung
+
+Bekannte Probleme:
+\begin{itemzie}
+\item SAT
+\item 3-SAT
+\item
+\item SUBSET SUM
+\item IND SET
+\item VC
+\item 3-Färbung
+\end{itemzie}
+
+KNAPSACK (Entscheidungversion)
+Eingabe: n Gegenstände, jedes mit Gewicht $g_i$ und einem Wert $w_i$, $1 \leq i \leq n$, sowie Gewichtslimit G, Werteschranke W
+Frage: \exist eine Auswahl S \subset \{1,...,n\}, sodass \sum_i\in S(g_i) \leq G und \sum_i\in S(w_i) \geq W?
+
+Subset Sum
+Eingabe: n Objekte 1,...,n mit Größe a_1,...,a_n und B \in N
+Frage: Gibt es eine Auswahl I \subset \{1,...,n\}, sodass \sum_{i\in I}(a_i) = B
+-> Bekannt NP-Vollständig
+
+SUBSET SUM $\leq_p$ KNAPSACK
+Sei <n,a_1,...;a_n,B> eine Eingabe für Subset Sum. Wir konstruieren daraus eine Eingabe für KNAPSACK, wie folgt: <m,g_1,...,g_m,w_1,...,w_m,G,W> für KNAPSACK: 
+\begin{itemzie}
+\item m := n
+\item g_1 := a_1, g_2 := a_2, ..., g_n := a_n
+\item w_1 := a_1, w_2 := a_2, ..., w_n := a_n
+\item G := B, W := B
+\end{itemize}
+
+z.Z <n,a_1,...a_n,B> \in SUBSET SUM, d.h. \exists I \subset {1,...,n} mit \sum_{i\in I}(a_1) = B \Rightleftarrow <m,g_1,...,g_m,w_1,...,w_m,G,W> \in KNAPSACK, d.h. \exists S \subset \{1,...,m\} mit \sum_{i\in S}(g_i) \leq G und \sum_{i\in S}(w_i) \geq W
+
+\Rightarrow : Sei I \subset \{1,...,n\} mit \sum{i\in I} (a_i) = B.
+Dann definiere S := I. Es gilt 
+\sum_{i \in S} (g_i) = \sum_{i \in S} (a_i) = B = G, d.h. \sum_{i \in S}(g_i) \leq G
+
+\sum_{i\in I} (w_i) = \sum_{i\in I} a_i = B = W, d.h. \sum_{i \in S} (w_i) \geq W
+\Rightarrow S ist eine Lösung für Eingabe von KNAPSACK
+
+\Leftarrow : Sei S \subset \{1,...,n\} mit \sum{i \in S} (g_i) \leq G und \sum_{i\in S} (w_i) \geq W.
+\sum_{i \in I}(a_i) = \sum_{i \in S}(g_i) \leq G = B, d.h. \sum_{i\in I} (a_i) \leq B
+
+\sum_{i \in I} (a_i) = \sum_{i \in S} (w_i) \geq W = B, d.h. \sum_{i\in I}(a_i) \geq B
+\Rightarrow \sum_{i\in I}(a_i) = B d.h. I ist eine Lösung für Eingabe von SUBSET SUM 
+
+
+Polynomielle Reduktion
+$A \leq_p B$ d.h. es gibt in polynomieller Zeit berechenbare Konstruktionsvorschrift f mit der Eigenschaft $\forall$ Eingaben x von a: $x \in A \Leftrightarrow f(x) \in B$
+
+Dann gilt: 
+\begin{itemize}
+\item Ist B "leicht", dann ist A auch leicht
+\item \Rightarrow ist A NP-Vollständig, dann ist B "schwer"
+\end{itemzie}
+
+Annahme: B kann in polynomieller Zeit gelöst werden
+
+Satz von Cook ("Anfang von alle Theorien"): A ist NP-vollständig:
+\begin{itemize}
+\item $A \in NP$ und
+\item $\forall L \in NP: L \leq_p A$
+\end{itemzie}
+SAT ist NP-Vollständig
+
+MONOTONE NAE 3-SAT \leq_p 3-Färbung
+$x = (x \vee y \vee z) \wedge (x \vee y \vee u)$ 
+
+Hilfsgraph f(x)
+{x,y,z,u} -- h
+v^1_x -- v^1_y -- v^1_z --v^1_x
+v^2_x -- v^2_y -- v^2_u --v^2_x
+i -- v_i
+
+x ist NAE-Erfüllbar
+\rightarrow: f(x) ist 3-färbbar
+
+f(x) 3-färbbar
+x ist NAE-erfüllbar
+
