@@ -390,4 +390,71 @@ Durchlaufen des Algorithmus liefert uns beispielsweise:
 	\item $S = \{w, v, b\}, \quad \overline{S} = \{c, u\}$
 	\item $S = \{w, v, b, a\}, \quad \overline{S} = \{c, u\}$
 \end{enumerate}
+
+{\Large\textbf{Vorlesung 3.11.15}}\\
+\begin{framed}
+	\textbf{Job-Scheduling (Entscheidungsversion):}
+	\begin{description}
+		\item  [Eingabe:] $m$ Maschinen, $n$ Aufgaben mit einer Bearbeitungszeit $d_1, \ldots, d_n$ und $T$
+		\item [Frage:] Existiert eine Verteilung der $n$ Jobs auf die $m$ identischen Maschinen, sodass die Gesamtausführungszeit $\sum_{i=1}^{n} d_i \leq T$?
+	\end{description}
+\end{framed}
+\begin{framed}
+	\textbf{PARTITION (Entscheidungsversion):}
+	\begin{description}
+		\item  [Eingabe:] $n$ Elemente mit den Werten $a_1, \ldots, a_n$
+		\item [Frage:] Existiert eine Aufteilung der $n$ Elemente in zwei disjunkte Mengen, sodass die Summe der Werte identisch ist? \\
+		$\exists A \stackrel{\cdot}{\cup} B = \{1, \ldots, n\}$ mit $\sum_{i \in A} a_i = \sum_{i \in B} a_i$
+	\end{description}
+\end{framed}
+
+Beweis das Job-Scheduling $\in \mathbb{NPC}$ (bereits für $m=2$): PARTITION $\leq_p$ Job-Scheduling\\
+''$\Rightarrow$'':
+\begin{itemize}
+	\item Sei $A \stackrel{\text{{\Huge.}}}{\cup} B = \{1, \ldots, n\}$ mit $\sum_{i \in A} a_i = \sum_{i \in B} a_i \Rightarrow \frac{1}{2} \sum_{i=1}^{n}a_i = T$
+	\item $M_1: J_k, k \in A$
+	\item $M_2: J_k, k \in B$
+\end{itemize}
+Daraus folgt die Ausführungsdauer = $\max\{\sum_{k \in A} d_k, \sum_{k \in B} d_k\} = \max\{\sum_{k \in A} a_k, \sum_{k \in B} a_k\} = T$\\
+$\checkmark$\\
+\\
+''$\Leftarrow$'':
+\begin{itemize}
+	\item Sei $M_1: J_k, k \in X$ und $M_2: J_k, k \in Y$, \\
+	wobei $X  \stackrel{\text{{\Huge.}}}{\cup} Y = \{1, \ldots, n\}$ mit $\max\{\sum_{k \in X} d_k, \sum_{k \in B} d_k\} \leq T = \frac{1}{2} \sum_{i=1}^{n}a_i$
+\end{itemize}
+Definiere: $A := X$ und $B := Y$. Dann gilt\\
+\begin{align*}
+\sum_{i \in A} a_i = \sum_{i \in X} d_i &\leq \sum_{i=1}^{n} a_i\\
+\sum_{i \in B} a_i = \sum_{i \in Y} d_i &\leq \sum_{i=1}^{n} a_i
+\intertext{Addition der zwei Ungleichungen ergibt:}
+\sum_{i=1}^{n} a_i = \sum_{i \in A} a_i + \sum_{i \in B} a_i &\leq 2 \sum_{i=1}^{n} a_i
+\intertext{Überall muss Gleichheit gelten, sodass}
+\sum_{i \in A} a_i = \frac{1}{2} \sum_{i=1}^{n} a_i &= \sum_{i \in B} a_i
+\end{align*}
+$\checkmark$\\
+\\
+Eingabelänge für Job-Scheduling:
+\[\log m + \log n + \underbrace{\sum_{k=1}^{n} \log d_k}_{\geq n} \Rightarrow n \cdot \mathcal{O}(m) = \mathcal{O}(n \cdot m)\]\\
+\\
+\\
+{\Large\textbf{Vorlesung 5.11.15}}\\
+Beispiel FPAS Knapsack DynKS Algorithmus:\\\\
+$
+\begin{array}{|c|c|c|c|c|c|c|c|c|}
+	\hline
+	i \\
+	\hline
+	4 & 2 & 3 & 3 & 5 & 7 & 9 & 12 & 14\\
+	\hline
+	3 & 2 & 3 & 3 & 5 & \infty & \infty & \infty & \infty\\
+	\hline
+	2 & 3 & 3 & 5 & \infty & \infty & \infty & \infty & \infty\\
+	\hline
+	1 & 2 & \infty & \infty & \infty & \infty &\infty & \infty & \infty\\
+	\hline
+	n & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
+	\hline
+\end{array}
+$
 \end{document}
