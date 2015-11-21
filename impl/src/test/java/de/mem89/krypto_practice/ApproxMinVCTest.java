@@ -1,6 +1,7 @@
-package de.mem89;
+package de.mem89.krypto_practice;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.Set;
 
@@ -43,7 +44,7 @@ public class ApproxMinVCTest {
 		Set<Integer> vc = minVc.getVertexCover();
 		
 		System.out.println(vc);
-
+		fail("Not yet implemented");
 
 	}
 
