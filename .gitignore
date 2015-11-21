@@ -124,3 +124,10 @@ sympy-plots-for-*.tex/
 # WinEdt
 *.bak
 *.sav
+
+# Java, Maven and Eclipse
+impl/target/
+impl/.classpath
+impl/.gitignore
+impl/.project
+impl/.settings/
